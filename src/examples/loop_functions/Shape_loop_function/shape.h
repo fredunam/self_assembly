@@ -57,6 +57,7 @@ public:
     virtual void Init(TConfigurationNode &t_tree);
     virtual void Reset();
     // virtual void Destroy();
+    void read_target();
     virtual void PreStep();
     virtual void PostStep();
 
@@ -75,11 +76,11 @@ public:
     // Get the kilobot LED color
     CColor GetKilobotLedColor(CKilobotEntity *kilobot_entity);
 
-    // Get the options from the xml file
-    void GetOptions(TConfigurationNode& t_tree);
-
-    // Add an option to the options vector
-    void AddOption(TConfigurationNode& t_node);
+//    // Get the options from the xml file
+//    void GetOptions(TConfigurationNode& t_tree);
+//
+//    // Add an option to the options vector
+//    void AddOption(TConfigurationNode& t_node);
 
 
 private:

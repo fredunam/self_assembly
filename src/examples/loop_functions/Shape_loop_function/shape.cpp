@@ -1,27 +1,31 @@
 //
 // Created by fred on 1/10/22.
 //
+#include <iostream>
 
 #include "shape.h"
 #define I2I(x,y) int(x)*MatrixSize_x+int(y)
 #define I2I_OBS(x,y) int(x)*OBSMatrixSize_x+int(y)
 
-Shape ::Shape() {
+Shape::Shape():CLoopFunctions(),m_cSimulator(GetSimulator()), m_iCellsPerMetre(100),m_iCellsPerMetreOBS(100), m_ohcEmbodiedEntity(CEmbodiedEntity(NULL, "ohc_body", CVector3(0,0,1), CQuaternion())),
+               m_cCommAnchor(m_ohcEmbodiedEntity.AddAnchor("comm", CVector3(0,0,0))),m_tx_flag(false), m_messaging_counter(0),m_floor_counter(0), m_update_matrix_timesteps(0), MatrixSize_x(0), MatrixSize_y(0),
+               floorMatrix(0),OBSMatrixSize_x(0), OBSMatrixSize_y(0), obstacle_Matrix(0),m_showObstacleAvoidanceArea(false), maxPheroLimit(std::numeric_limits<float>::max()), evaporation_rate(0.05),
+               diffusion_rate(0.02), pheromone_amount(250),m_obstacle_avoidance_range(0.05),m_Vmax(0) {
     // TODO Ajouter les paramètres du Construct
 }
 
-Shape ::~Shape(){
+Shape::~Shape(){
 
 }
 
 
     // TODO lire le fichier shape et attribuer une target selon l'id
     // TODO
-void Shape ::Init(TConfigurationNode &t_tree) {
+void Shape::Init(TConfigurationNode &t_tree) {
     // TODO init les params
 }
 
-void CArk::Reset() {
+void Shape::Reset() {
     // TODO voir si ce code est necc
     m_messaging_counter = 0;
 }
@@ -30,25 +34,23 @@ void CArk::Reset() {
  *
  */
 void Shape::read_target(){
-    string filename("/home/fred/argos3-kilobot/u_letter.txt");
+    ifstream input_file("/home/fred/argos3-kilobot/u_letter.txt");
     vector<string> lines;
     string line;
     int nbLine = 0;
 
-    ifstream input_file(filename);
-
-    if(!input_file.is_open()){
-        cerr << ERROR << endl;
-        return EXIT_FAILURE;
+    if(input_file){
+        while(getline(input_file, line)){
+            cout << line << endl;
+            nbLine ++;
+        }
     }
 
-    while(getline(input_file, line)){
-        lines.push_back(line);
-        nbLines++;
+    else{
+        cout << "ERROR: Impossible to read file" << endl;
     }
-    cout << "taille d'une ligne : " << line.size() << endl;
-    cout << "nbline : " << nbLines << endl;
 
+    //cout << "il y a " << nbLine << "dans ce fichier" << ednl;
 
 }
 
@@ -98,7 +100,7 @@ UInt16 Shape::GetKilobotId(CKilobotEntity *kilobot_entity){
 /****************************************/
 /****************************************/
 
-CColor CArk::GetKilobotLedColor(CKilobotEntity *kilobot_entity){
+CColor Shape::GetKilobotLedColor(CKilobotEntity *kilobot_entity){
     return kilobot_entity->GetLEDEquippedEntity().GetLED(0).GetColor();
 }
 

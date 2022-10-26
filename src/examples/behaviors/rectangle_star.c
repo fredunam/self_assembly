@@ -1,13 +1,12 @@
 #include <kilolib.h>
 
 message_t message;
-// Flag to keep track of message transmission.
 int message_sent = 0;
 
 void setup()
 {
     message.type = NORMAL;
-    message.data[0] = 0;
+    message.data[0] = kilo_uid;
     message.crc = message_crc(&message);
 }
 
@@ -39,9 +38,7 @@ void message_tx_success()
 int main()
 {
     kilo_init();
-    // Register the message_tx callback function.
     kilo_message_tx = message_tx;
-    // Register the message_tx_success callback function.
     kilo_message_tx_success = message_tx_success;
     kilo_start(setup, loop);
 

@@ -18,6 +18,7 @@
 
     <kilobot_controller id="kbc">
       <actuators>
+        <differential_steering implementation="default" />
         <kilobot_led implementation="default" />
       </actuators>
       <sensors />
@@ -34,6 +35,14 @@
       <body position="0,0,0" orientation="0,0,0" />
       <controller config="kbc" />>
     </kilobot>
+    <kilobot id="kb2">
+      <body position="0,0.033,0" orientation="0,0,0" />
+      <controller config="kbc" />>
+    </kilobot>
+    <kilobot id="kb3">
+          <body position="0.052,0,0" orientation="180,0,0" />
+          <controller config="kbc" />>
+        </kilobot>
   </arena>
 
   <!-- ******************* -->

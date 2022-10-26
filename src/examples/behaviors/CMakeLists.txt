@@ -72,4 +72,50 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   #
   add_executable(test_debug test_debug.h test_debug.c)
   target_link_libraries(test_debug argos3plugin_simulator_kilolib)
+
+  #
+  # Lab ark
+  #
+  add_executable(lab_foraging lab_foraging.c)
+  target_link_libraries(lab_foraging argos3plugin_simulator_kilolib)
+
+
+  #
+  # shape_formation
+  #
+  add_executable(shape_formation shape_formation.c)
+  target_link_libraries(shape_formation argos3plugin_simulator_kilolib)
+
+  #
+  # orbit_FSM
+  #
+  add_executable(orbit_FSM orbit_FSM.c)
+  target_link_libraries(orbit_FSM argos3plugin_simulator_kilolib)
+
+  #
+  # orbit_original
+  #
+  add_executable(orbit_original orbit_original.c)
+  target_link_libraries(orbit_original argos3plugin_simulator_kilolib)
+
+  #
+  # orbit2
+  #
+  add_executable(orbit2 orbit2.c)
+  target_link_libraries(orbit2 argos3plugin_simulator_kilolib)
+
+  #
+  # preuve_desaxe
+  #
+  add_executable(preuve_desaxe preuve_desaxe.c)
+  target_link_libraries(preuve_desaxe argos3plugin_simulator_kilolib)
+
+  #
+  # rectangle
+  #
+  add_executable(rectangle rectangle.c)
+  target_link_libraries(rectangle argos3plugin_simulator_kilolib)
+  add_executable(rectangle_star rectangle_star.c)
+  target_link_libraries(rectangle_star argos3plugin_simulator_kilolib)
+
 endif(ARGOS_BUILD_FOR_SIMULATOR)

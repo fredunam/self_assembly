@@ -2,8 +2,8 @@
 #include "stdlib.h"
 
 // Constants for orbit control.
-#define TOO_CLOSE_DISTANCE 50
-#define DESIRED_DISTANCE 60
+#define TOO_CLOSE_DISTANCE 75
+#define DESIRED_DISTANCE 90
 
 // Constants for motion handling function.
 #define STOP 0
@@ -61,7 +61,7 @@ void loop()
         {
             set_color(RGB(0, 1, 0));
             set_motion(FORWARD);
-            printf("< TOO CLOSE - > Forward\n");
+            printf("< TOO CLOSE -> Forward\n");
         }
             // If not too close, turn left or right depending on distance,
             // to maintain orbit.
@@ -71,13 +71,13 @@ void loop()
             {
                 set_color(RGB(1, 0, 0));
                 set_motion(LEFT);
-                printf("< DESIRED - > Left\n");
+            printf("< DESIRED_DISTANCE -> Left\n");
             }
             else
             {
                 set_color(RGB(0, 0, 1));
                 set_motion(RIGHT);
-                printf("> DESIRED - > Right\n");
+                printf("> DESIRED_DISTANCE -> Right\n");
             }
         }
     }
@@ -92,7 +92,6 @@ void message_rx(message_t *m, distance_measurement_t *d)
 int main()
 {
     kilo_init();
-
     kilo_message_rx = message_rx;
     kilo_start(setup, loop);
 

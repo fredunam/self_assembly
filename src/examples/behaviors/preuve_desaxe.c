@@ -14,6 +14,9 @@
 int current_motion = STOP;
 int distance;
 int new_message = 0;
+message_t message;
+// Flag to keep track of message transmission.
+int message_sent = 0;
 
 // Function to handle motion.
 void set_motion(int new_motion)
@@ -55,32 +58,19 @@ void loop()
     if (new_message == 1)
     {
         new_message = 0;
-
-        // If too close, move forward to get back into orbit.
-        if (distance < TOO_CLOSE_DISTANCE)
-        {
-            set_color(RGB(0, 1, 0));
-            set_motion(FORWARD);
-            printf("< TOO CLOSE - > Forward\n");
-        }
-            // If not too close, turn left or right depending on distance,
-            // to maintain orbit.
-        else
-        {
-            if (distance < DESIRED_DISTANCE)
-            {
-                set_color(RGB(1, 0, 0));
-                set_motion(LEFT);
-                printf("< DESIRED - > Left\n");
-            }
-            else
-            {
-                set_color(RGB(0, 0, 1));
-                set_motion(RIGHT);
-                printf("> DESIRED - > Right\n");
-            }
-        }
+        printf("distance = %d\n", distance);
     }
+}
+
+message_t *message_tx()
+{
+    return &message;
+}
+
+void message_tx_success()
+{
+    // Set flag on message transmission.
+    message_sent = 1;
 }
 
 void message_rx(message_t *m, distance_measurement_t *d)
@@ -92,7 +82,8 @@ void message_rx(message_t *m, distance_measurement_t *d)
 int main()
 {
     kilo_init();
-
+    kilo_message_tx = message_tx;
+    kilo_message_tx_success = message_tx_success;
     kilo_message_rx = message_rx;
     kilo_start(setup, loop);
 

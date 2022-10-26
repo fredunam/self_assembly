@@ -16,7 +16,7 @@
   <!-- *************** -->
   <controllers>
 
-    <kilobot_controller id="seed">
+    <kilobot_controller id="star">
       <actuators>
         <differential_steering implementation="default" />
         <kilobot_led implementation="default" />
@@ -25,7 +25,7 @@
       <sensors>
         <kilobot_communication implementation="default" medium="kilocomm" show_rays="true" />
       </sensors>
-      <params behavior="build/examples/behaviors/shape_seed" />
+      <params behavior="build/examples/behaviors/orbit_star" />
     </kilobot_controller>
 
     <kilobot_controller id="planet">
@@ -37,7 +37,7 @@
       <sensors>
         <kilobot_communication implementation="default" medium="kilocomm" show_rays="true" />
       </sensors>
-      <params behavior="build/examples/behaviors/shape_formation" />
+      <params behavior="build/examples/behaviors/orbit_FSM" />
     </kilobot_controller>
 
   </controllers>
@@ -48,31 +48,19 @@
   <arena size="2, 2, 1" center="0,0,0.5">
     <kilobot id="kb1">
       <body position="0,0,0" orientation="0,0,0" />
-      <controller config="seed" />>
+      <controller config="star" />>
     </kilobot>
 
     <kilobot id="kb2">
-      <body position="0.05,0,0" orientation="0,0,0" />
-      <controller config="seed" />>
+      <body position="0,0.03,0" orientation="0,0,0" />
+      <controller config="star" />>
     </kilobot>
 
     <kilobot id="kb3">
-          <body position="0,0.05,0" orientation="0,0,0" />
-          <controller config="seed" />>
+      <body position="0.05,0.015,0" orientation="0,0,0" />
+      <controller config="planet" />>
     </kilobot>
 
-    <distribute>
-        <position method = "grid"
-                    center="0.15,0.15,0"
-                    distances = "0.07,0.07,0"
-                    layout = "3,3,1" />
-        <orientation method = "constant" values = "0,0,0" />
-        <entity quantity="9" max_trials="1">
-            <kilobot id="planet">
-                <controller config = "planet" />
-            </kilobot>
-        </entity>
-    </distribute>
   </arena>
 
   <!-- ******************* -->
@@ -95,12 +83,8 @@
   <visualization>
     <qt-opengl>
       <camera>
-        <placements>
-            <placement index="0" position="0,0.075,0.675" look_at="0,0.075,-0.325" up="1,0,0" lens_focal_length="5" />
-                            <placement index="1" position="-3.5,0,2" look_at="0,0,0" up="1,0,0" lens_focal_length="30" />
-                            <placement index="2" position="0.0991124,-0.22085,0.257469" look_at="0.0991124,-0.22085,-0.742531" up="0.994856,-0.101302,0" lens_focal_length="20" />
-                            <placement index="3" position="0.0557748,0.611663,0.194361" look_at="0.095209,0.605023,-5.80484" up="0.985329,-0.165914,0.0399893" lens_focal_length="20" />
-        </placements>
+        <placement idx="0" position="-0.126801,-0.00109986,0.249553" look_at="0.303994,-0.00540795,-0.652886" lens_focal_length="20" />
+        <placement idx="1" position="-0.0229259,-0.177184,0.0725521" look_at="0.0273839,0.812385,-0.0624333" lens_focal_length="20" />
       </camera>
     </qt-opengl>
   </visualization>
