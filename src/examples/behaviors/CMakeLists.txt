@@ -123,5 +123,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   #
   add_executable(triangle triangle.c)
   target_link_libraries(triangle argos3plugin_simulator_kilolib)
+  add_executable(triangle_star triangle_star.c)
+  target_link_libraries(triangle_star argos3plugin_simulator_kilolib)
 
 endif(ARGOS_BUILD_FOR_SIMULATOR)

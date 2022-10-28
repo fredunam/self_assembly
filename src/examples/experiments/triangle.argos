@@ -16,7 +16,19 @@
   <!-- *************** -->
   <controllers>
 
-    <kilobot_controller id="kbc">
+    <kilobot_controller id="fixe">
+      <actuators>
+        <differential_steering implementation="default" />
+        <kilobot_led implementation="default" />
+        <kilobot_communication implementation="default" />
+      </actuators>
+      <sensors>
+        <kilobot_communication implementation="default" medium="kilocomm" show_rays="true" />
+      </sensors>
+      <params behavior="build/examples/behaviors/triangle_star" />
+    </kilobot_controller>
+
+    <kilobot_controller id="move">
       <actuators>
         <differential_steering implementation="default" />
         <kilobot_led implementation="default" />
@@ -34,18 +46,20 @@
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="2, 2, 1" center="0,0,0.5">
-    <distribute>
-          <position method="grid"
-                    center="0,0,0"
-                    distances="0.07,0.07,0"
-                    layout="1,3,1" />
-          <orientation method="constant" values="0,0,0" />
-          <entity quantity="3" max_trials="1">
-            <kilobot id="kb">
-              <controller config="kbc" />>
-            </kilobot>
-          </entity>
-        </distribute>
+    <kilobot id="kb1">
+        <body position="0.05,0,0" orientation="0,0,0" />
+        <controller config="fixe" />>
+    </kilobot>
+
+    <kilobot id="kb2">
+        <body position="-0.05,0,0" orientation="0,0,0" />
+        <controller config="fixe" />>
+    </kilobot>
+
+    <kilobot id="kb3">
+        <body position="0.02,0.03,0" orientation="90,0,0" />
+        <controller config="move" />>
+    </kilobot>
 
   </arena>
 
@@ -66,12 +80,17 @@
   <!-- ****************** -->
   <!-- * Visualization * -->
   <!-- ****************** -->
-  <visualization>
-    <qt-opengl>
-      <camera>
-        <placement idx="0" position="-0.660983,0,0.6875" look_at="0.0531593,0,-0.0125011" lens_focal_length="20" />
-      </camera>
-    </qt-opengl>
-  </visualization>
+    <visualization>
+        <qt-opengl>
+          <camera>
+            <placements>
+                <placement index="0" position="0,0.075,0.675" look_at="0,0.075,-0.325" up="2,0,0" lens_focal_length="10" />
+                <placement index="1" position="-3.5,0,2" look_at="0,0,0" up="1,0,0" lens_focal_length="30" />
+                <placement index="2" position="0.0991124,-0.22085,0.257469" look_at="0.0991124,-0.22085,-0.742531" up="0.994856,-0.101302,0" lens_focal_length="20" />
+                <placement index="3" position="0,0.075,0.675" look_at="0,0.075,-0.325" up="1,0,0" lens_focal_length="7" />
+            </placements>
+          </camera>
+        </qt-opengl>
+      </visualization>
 
 </argos-configuration>
